@@ -20,11 +20,11 @@ This action will:
 Assuming the `compile`, `format:verify`, and `test` scripts exist in your `package.json`, this setup will run those commands in parallel as your Push CI job:
 
 ```yml
-# .github/workflows/ci_push.yml
-name: Frontend CI
+# .github/workflows/push.yml
+name: Push CI
 
 jobs:
-  lint:
+  ci:
     runs-on: ubuntu-latest
     steps:
       - uses: Codecademy/run-on-yarn@v1
