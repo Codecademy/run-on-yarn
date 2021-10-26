@@ -17,6 +17,27 @@ This action will:
 
 ## Example
 
+### Simplest Usage
+
+Running a single `yarn test` command on all commit pushes:
+
+```yml
+# .github/workflows/push.yml
+name: Push CI
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: Codecademy/run-on-yarn@v1
+        with:
+          command: test
+
+on: push
+```
+
+### Matrix of Commands
+
 Assuming the `compile`, `format:verify`, and `test` scripts exist in your `package.json`, this setup will run those commands in parallel as your Push CI job:
 
 ```yml
