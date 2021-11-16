@@ -60,6 +60,48 @@ jobs:
 on: push
 ```
 
+### Optional Inputs
+
+Specifying a Node.js version
+
+```yml
+# .github/workflows/push.yml
+name: Push CI
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: Codecademy/run-on-yarn@v1
+        with:
+          command: test
+          node-version: 16
+
+on: push
+```
+
+
+Specifying a different Github token to be used during checkout
+
+**Note:** this is only necessary to override in certain extreme edge cases
+
+```yml
+# .github/workflows/push.yml
+name: Push CI
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: Codecademy/run-on-yarn@v1
+        with:
+          command: test
+          github-token: ${{ secrets.PERSONAL_TOKEN }}
+
+on: push
+```
+
+
 ### Contribution Guidelines
 
 We'd love to have you contribute!
