@@ -4,19 +4,29 @@ inputs:
   command:
     description: 'Command to run'
     required: true
+  node-version:
+    description: 'Node Version'
+    default: 14
+    required: false    
+  github-token:
+    description: 'Github token to use when checking out the repo'
+    default: ${{ github.token }}
+    required: false        
 runs:
   using: "composite"
   steps:
     - uses: actions/checkout@v2
+      with:
+        token: ${{ inputs.github-token }}
     - uses: actions/setup-node@v2
       with:
         cache: 'yarn'
-        node-version: '14'
+        node-version: '${{ inputs.node-version }}'
     - uses: actions/cache@v2
       id: yarn-cache
       with:
         path: '**/node_modules'
-        key: ${{ runner.os }}-yarn-node-14-${{ hashFiles('**/yarn.lock') }}
+        key: ${{ runner.os }}-yarn-node-${{ inputs.node-version }}-${{ hashFiles('**/yarn.lock') }}
     - name: Install Dependencies If Not Cached
       run: \[ -d node_modules \] || yarn install --frozen-lockfile
       shell: bash
