@@ -9,7 +9,7 @@ inputs:
     default: 14
     required: false    
   github-token:
-    description: 'Node Version'
+    description: 'Github token to use when checking out the repo'
     default: ${{ github.token }}
     required: false        
 runs:
