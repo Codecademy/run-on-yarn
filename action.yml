@@ -1,31 +1,35 @@
-name: 'Run on Yarn'
-description: 'Composite GitHub Action to run a command with Yarn.'
+name: "Run on Yarn"
+description: "Composite GitHub Action to run a command with Yarn."
 inputs:
   command:
-    description: 'Command to run'
+    description: "Command to run"
     required: true
   node-version:
-    description: 'Node Version'
+    description: "Node Version"
     default: 14
-    required: false    
+    required: false
   github-token:
-    description: 'Github token to use when checking out the repo'
+    description: "Github token to use when checking out the repo"
     default: ${{ github.token }}
-    required: false        
+    required: false
+  fetch-depth:
+    description: "Checkout depth"
+    default: 1
 runs:
   using: "composite"
   steps:
     - uses: actions/checkout@v2
       with:
         token: ${{ inputs.github-token }}
+        fetch-depth: ${{ inputs.fetch-depth }}
     - uses: actions/setup-node@v2
       with:
-        cache: 'yarn'
-        node-version: '${{ inputs.node-version }}'
+        cache: "yarn"
+        node-version: "${{ inputs.node-version }}"
     - uses: actions/cache@v2
       id: yarn-cache
       with:
-        path: '**/node_modules'
+        path: "**/node_modules"
         key: ${{ runner.os }}-yarn-node-${{ inputs.node-version }}-${{ hashFiles('**/yarn.lock') }}
     - name: Install Dependencies If Not Cached
       run: \[ -d node_modules \] || yarn install --frozen-lockfile
