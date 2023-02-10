@@ -6,7 +6,7 @@ inputs:
     required: true
   node-version:
     description: "Node Version"
-    default: 14
+    default: 16
     required: false
   github-token:
     description: "Github token to use when checking out the repo"
