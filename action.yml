@@ -22,7 +22,7 @@ runs:
       with:
         token: ${{ inputs.github-token }}
         fetch-depth: ${{ inputs.fetch-depth }}
-    - uses: actions/setup-node@v3
+    - uses: actions/setup-node@v4
       with:
         cache: "yarn"
         node-version: "${{ inputs.node-version }}"
